@@ -567,7 +567,7 @@ x_1 &= %s, \\quad x_2 = %s
 
 *** Auto discover search path
 #+begin_src emacs-lisp
-(setq projectile-project-search-path '(("~/Documents/" . 1) ("~/.dotfiles/" . 1)))
+(setq projectile-project-search-path '(("~/nixos-config" . 1) ("~/.config/doom" . 1)))
 #+end_src
 
 * SopS
