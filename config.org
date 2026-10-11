@@ -22,6 +22,7 @@
 - [[#gptel][GPTel]]
   - [[#format][Format]]
   - [[#models][Models]]
+- [[#ispell][Ispell]]
 - [[#latex][Latex]]
   - [[#cdlatex][Cdlatex]]
   - [[#latex-packages][Latex packages]]
@@ -39,6 +40,7 @@
   - [[#enable-show-paren-mode][Enable show-paren-mode]]
   - [[#directory][Directory]]
   - [[#notes][Notes]]
+  - [[#toc][TOC]]
   - [[#roam][Roam]]
   - [[#tables][Tables]]
   - [[#smartparens-fix][Smartparens fix]]
@@ -198,6 +200,16 @@
                            claude-haiku-5-5
                            claude-fable-5-1)
                  :key (lambda () (my/sops-secret "anthropic_api_key"))))
+#+end_src
+
+* Ispell
+
+#+begin_src emacs-lisp
+(after! ispell
+  (setq ispell-program-name "hunspell"
+        ispell-dictionary "en_US,cs_CZ")
+  (ispell-set-spellchecker-params)
+  (ispell-hunspell-add-multi-dic "en_US,cs_CZ"))
 #+end_src
 
 * Latex
@@ -473,6 +485,12 @@ x_1 &= %s, \\quad x_2 = %s
 ** Notes
 #+begin_src emacs-lisp
 (setq org-default-notes-file (concat org-directory "/notes.org"))
+#+end_src
+
+** TOC
+#+begin_src emacs-lisp
+(after! toc-org
+  (setq toc-org-hrefify-default "org"))
 #+end_src
 
 ** Roam
