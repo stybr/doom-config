@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: domain-of-a-function
+# key: mdf
+# --
+D(${1:f})$0

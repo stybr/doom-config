@@ -1,0 +1,12 @@
+* Root :elfeed:
+** Politics :politics:
+*** [[https://www.seznamzpravy.cz/rss][Seznam Zprávy - nejnovější články]]
+*** [[https://denikn.cz/feed][Deník N]]
+*** [[https://www.forum24.cz/feed][FORUM 24]]
+*** [[https://www.novinky.cz/rss][Novinky - nejnovější články]]
+** Gaming :gaming:
+*** [[https://indian-tv.cz/atom.xml][INDIAN]]
+** Gen Z :genz:
+*** [[https://refresher.cz/rss][REFRESHER – Hlas moderní generace | RSS]]
+** Linux :linux:
+*** [[https://feed.itsfoss.com/][It's FOSS]]

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: sinus
+# key: msn
+# --
+\\sin$0

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: curly-brackets
+# key: dcb
+# --
+{$1}$0

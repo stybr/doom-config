@@ -1,0 +1,6 @@
+# key: eq
+# name: equation*
+# --
+\begin{equation*}
+$0
+\end{equation*}

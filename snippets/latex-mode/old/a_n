@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: a_n
+# key: an
+# --
+
+a_{n}

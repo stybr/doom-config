@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: union
+# key: mcu
+# --
+\\cup$0

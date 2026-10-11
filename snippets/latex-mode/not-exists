@@ -1,0 +1,4 @@
+# key: mnx
+# name: not-exists
+# --
+\\nexists$0

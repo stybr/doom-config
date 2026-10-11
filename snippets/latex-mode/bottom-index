@@ -1,0 +1,4 @@
+# key: mbx
+# name: bottom-index
+# --
+${1:a}_{${2:n}}$0

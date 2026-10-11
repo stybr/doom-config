@@ -1,0 +1,4 @@
+# key: mpx
+# name: power-index
+# --
+${1:x}^{${2:2}}$0

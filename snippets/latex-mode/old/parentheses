@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: parentheses
+# key: dps
+# --
+($1)$0

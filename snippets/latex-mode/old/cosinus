@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: cosinus
+# key: mcs
+# --
+\\cos$0

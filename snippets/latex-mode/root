@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: root
+# key: mrt
+# condition: (texmathp)
+# --
+\sqrt[$1]{`%`$2}$0

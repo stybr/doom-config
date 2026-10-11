@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: equivalence
+# key: meq
+# --
+\\iff$0

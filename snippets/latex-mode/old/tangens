@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: tangens
+# key: mtn
+# --
+\\tan$0

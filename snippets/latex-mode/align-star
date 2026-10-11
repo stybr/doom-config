@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: align-star
+# key: ag
+# --
+
+\\begin{align*}
+$0
+\\end{align*}

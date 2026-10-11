@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: less-org-equal
+# key: mle
+# --
+\\le$0

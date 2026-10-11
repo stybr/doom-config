@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: diagonal-dots
+# key: mdds
+# --
+\\ddots$0

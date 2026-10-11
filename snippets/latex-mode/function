@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: function
+# key: mfn
+# --
+$1($2)$0

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: cotangens
+# key: mct
+# --
+\\cot$0

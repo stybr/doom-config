@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: new-line
+# key: mnl
+# --
+\\\\
+$0

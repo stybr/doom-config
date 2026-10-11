@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: absolute-value
+# key: mav
+# --
+|$1|$0

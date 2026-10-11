@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: sequence-limit
+# key: mlin
+# --
+\\lim_{${1:n} \\to \\infty} ($2)$0

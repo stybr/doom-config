@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: hyperbolic-sinus
+# key: msh
+# --
+\\sinh$0

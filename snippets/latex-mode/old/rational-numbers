@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: rational-numbers
+# key: mqq
+# --
+\\mathbb{Q}$0

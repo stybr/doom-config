@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: natural-logarithm
+# key: mln
+# --
+\\ln$0

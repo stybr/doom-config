@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: negative-infinity
+# key: mny
+# --
+-\\infty$0

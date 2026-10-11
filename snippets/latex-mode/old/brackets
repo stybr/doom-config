@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: brackets
+# key: mbk
+# --
+[$1]$0

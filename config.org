@@ -1,0 +1,627 @@
+#+title: Config
+
+* Table of Contents :toc:
+- [[#copilot][Copilot]]
+  - [[#global-copilot-mode][Global Copilot mode]]
+  - [[#indentation][Indentation]]
+  - [[#keybinding][Keybinding]]
+- [[#doom][Doom]]
+  - [[#appearance][Appearance]]
+- [[#elfeed][Elfeed]]
+  - [[#feed-dir][Feed dir]]
+- [[#emacs][Emacs]]
+  - [[#confirm-kill][Confirm kill]]
+  - [[#debug][Debug]]
+  - [[#appearance-1][Appearance]]
+  - [[#maximize-on-start][Maximize on start]]
+  - [[#initial-buffer][Initial buffer]]
+  - [[#hooks][Hooks]]
+  - [[#custom-keymaps][Custom keymaps]]
+- [[#evil][Evil]]
+  - [[#multiedit][Multiedit]]
+- [[#gptel][GPTel]]
+  - [[#format][Format]]
+  - [[#models][Models]]
+- [[#latex][Latex]]
+  - [[#cdlatex][Cdlatex]]
+  - [[#latex-packages][Latex packages]]
+  - [[#auto-preview][Auto preview]]
+  - [[#svg-settings-in-latex-preview][Svg settings in Latex preview]]
+  - [[#latex-snippets-in-org-mode][Latex snippets in org mode]]
+  - [[#matrix-generator][Matrix generator]]
+  - [[#augmented-matrix][Augmented matrix]]
+  - [[#horner-generator][Horner generator]]
+  - [[#quadratic-equation][Quadratic equation]]
+  - [[#polynom][Polynom]]
+  - [[#laas-settings][Laas settings]]
+- [[#org-mode][Org mode]]
+  - [[#appearance-2][Appearance]]
+  - [[#directory][Directory]]
+  - [[#notes][Notes]]
+  - [[#roam][Roam]]
+  - [[#tables][Tables]]
+  - [[#smartparens-fix][Smartparens fix]]
+  - [[#org-fragtog][Org fragtog]]
+- [[#projectile][Projectile]]
+  - [[#auto-discover][Auto discover]]
+- [[#sops][SopS]]
+  - [[#decrypt-secret][Decrypt secret]]
+  - [[#global-mode][Global mode]]
+- [[#treemacs][Treemacs]]
+  - [[#auto-modes][Auto modes]]
+  - [[#width][Width]]
+- [[#yasnippet][Yasnippet]]
+  - [[#yas-global-mode][Yas global mode]]
+  - [[#snippets-in-snippets][Snippets in snippets]]
+  - [[#file-templates][File templates]]
+
+* Copilot
+
+** Global Copilot mode
+#+begin_src emacs-lisp
+(add-hook 'org-mode-hook #'copilot-mode)
+#+end_src
+
+** Indentation
+#+begin_src emacs-lisp
+(with-eval-after-load 'copilot
+  ;; záchytná hodnota pro módy bez vlastního záznamu
+  (add-to-list 'copilot-indentation-alist '(prog-mode 2))
+  ;; konkrétní módy
+  (add-to-list 'copilot-indentation-alist '(org-mode 2))
+  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2))
+  (add-to-list 'copilot-indentation-alist '(nix-mode 2))
+  (add-to-list 'copilot-indentation-alist '(nix-ts-mode 2)))
+#+end_src
+
+** Keybinding
+#+begin_src emacs-lisp
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("C-=" . 'copilot-accept-completion)
+              ("M-n" . 'copilot-accept-completion-by-word)))
+#+end_src
+
+* Doom
+
+** Appearance
+#+begin_src emacs-lisp
+(setq doom-theme 'doom-one)
+(setq doom-font (font-spec :family "JetBrains Mono" :size 14))
+#+end_src
+
+
+* Elfeed
+
+** Feed dir
+#+begin_src emacs-lisp
+(setq rmh-elfeed-org-files '("/home/stybr/.config/doom/elfeed.org"))
+#+end_src
+
+* Emacs
+
+** Confirm kill
+#+begin_src emacs-lisp
+(setq confirm-kill-emacs nil)
+#+end_src
+
+** Debug
+#+begin_src emacs-lisp
+;; (setq debug-on-quit t)
+#+end_src
+
+** Appearance
+#+begin_src emacs-lisp
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+#+end_src
+
+*** Show line numbers
+#+begin_src emacs-lisp
+(setq display-line-numbers-type t)
+#+end_src
+
+*** Scrollbar in daemon fix
+#+begin_src emacs-lisp
+(add-hook 'after-make-frame-functions
+          (lambda (frame)
+            (scroll-bar-mode -1)))
+#+end_src
+
+
+*** Transparency
+#+begin_src emacs-lisp
+;;(add-hook 'after-make-frame-functions
+;;(after! frame
+ ;; (set-frame-parameter nil 'alpha-background 90)
+  ;;(add-to-list 'default-frame-alist '(alpha-background . 90))))
+
+;;(set-frame-parameter nil 'alpha-background 90)
+;;(add-to-list 'default-frame-alist '(alpha-background . 90))
+#+end_src
+
+*** Window decoration
+#+begin_src emacs-lisp
+(setq default-frame-alist '((undecorated . t)))
+#+end_src
+
+** Maximize on start
+#+begin_src emacs-lisp
+;;(add-to-list 'default-frame-alist '(fullscreen . maximized))
+#+end_src
+
+** Initial buffer
+#+begin_src emacs-lisp
+(setq initial-buffer-choice "~/Documents/start.org")
+#+end_src
+
+** Hooks
+#+begin_src emacs-lisp
+(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+#+end_src
+
+** Custom keymaps
+#+begin_src emacs-lisp
+(map! :leader :desc "Comment line" "-" #'comment-line)
+(map! :leader :desc "Toggle LaTeX preview" "l" #'org-latex-preview)
+(map! :leader :desc "Switch between valign and org-modern" "v" #'my/org-toggle-table-style)
+#+end_src
+
+* Evil
+
+** Multiedit
+
+#+begin_src emacs-lisp
+
+#+end_src
+
+* GPTel
+
+** Format
+#+begin_src emacs-lisp
+(setq! gptel-default-mode 'org-mode)
+#+end_src
+
+** Models
+
+*** Claude
+#+begin_src emacs-lisp
+(setq
+ gptel-model 'claude-sonnet-5-5
+ gptel-backend (gptel-make-anthropic "Claude"
+                 :stream t
+                 :models '(claude-sonnet-5-5
+                           claude-opus-5-5
+                           claude-haiku-5-5
+                           claude-fable-5-1)
+                 :key (lambda () (my/sops-secret "anthropic_api_key"))))
+#+end_src
+
+* Latex
+
+** Cdlatex
+#+begin_src emacs-lisp
+(add-hook 'org-mode-hook #'org-cdlatex-mode)
+
+(after! cdlatex
+  (define-key org-cdlatex-mode-map (kbd "'") nil))
+#+end_src
+
+** Latex packages
+#+begin_src emacs-lisp
+(after! org
+  (dolist (pkg '("stmaryrd" "cancel" "tikz" "mathtools"))
+    (add-to-list 'org-latex-packages-alist (list "" pkg t)))
+
+  (setq org-format-latex-header
+        (concat org-format-latex-header
+                "\n\\usetikzlibrary{arrows.meta,positioning,calc,angles,quotes}")))
+#+end_src
+
+** Auto preview
+#+begin_src emacs-lisp
+(setq org-startup-with-latex-preview t)
+#+end_src
+
+** Svg settings in Latex preview
+#+begin_src emacs-lisp
+(after! org
+  (setq org-preview-latex-default-process 'dvisvgm
+        org-pretty-entities nil
+        org-format-latex-options
+        (thread-first org-format-latex-options
+                      (plist-put :scale 1)
+                      (plist-put :background "Transparent"))))
+#+end_src
+
+** Latex snippets in org mode
+#+begin_src emacs-lisp
+(add-hook 'org-mode-hook
+          (lambda ()
+            (add-to-list 'yas--extra-modes 'latex-mode)))
+#+end_src
+
+** Matrix generator
+#+begin_src emacs-lisp
+(defun my/latex-matrix (&optional type opt)
+  "Zeptá se na rozměr a vloží matici s poli na vyplnění.
+OPT jsou volby za \\begin, např. \"[r]\"."
+  (interactive)
+  (let* ((type (or type "pmatrix"))
+         (dims (mapcar #'string-to-number
+                       (split-string (read-string "Rozměr (např. 3x4): ") "[x ]+" t)))
+         (rows (nth 0 dims))
+         (cols (or (nth 1 dims) rows))
+         (n 0))
+    (yas-expand-snippet
+     (concat "\\begin{" type "}" (or opt "") "\n"
+             (mapconcat
+              (lambda (_r)
+                (mapconcat (lambda (_c) (format "$%d" (setq n (1+ n))))
+                           (number-sequence 1 cols) " & "))
+              (number-sequence 1 rows) " \\\\\\\\\n")
+             "\n\\end{" type "}$0"))))
+#+end_src
+
+** Augmented matrix
+#+begin_src emacs-lisp
+(defun my/latex-augmented-matrix ()
+  "Zeptá se na rozměr a vloží rozšířenou matici s čárou před posledním sloupcem."
+  (interactive)
+  (let* ((dims (mapcar #'string-to-number
+                       (split-string (read-string "Rozměr (např. 3x4): ") "[x ]+" t)))
+         (rows (nth 0 dims))
+         (cols (or (nth 1 dims) rows))
+         (spec (concat (make-string (1- cols) ?r) "|r"))
+         (n 0))
+    (yas-expand-snippet
+     (concat "\\left[\\begin{array}{" spec "}\n"
+             (mapconcat
+              (lambda (_r)
+                (mapconcat (lambda (_c) (format "$%d" (setq n (1+ n))))
+                           (number-sequence 1 cols) " & "))
+              (number-sequence 1 rows) " \\\\\\\\\n")
+             "\n\\end{array}\\right]$0"))))
+#+end_src
+
+** Horner generator
+#+begin_src emacs-lisp
+(defun my/num->string (n)
+  (if (integerp n) (number-to-string n) (format "%g" n)))
+
+(defun my/horner (coeffs root)
+  "Vloží Hornerovo schéma pro COEFFS a kořen ROOT.
+Dělení se opakuje, dokud vychází nulový zbytek."
+  (interactive
+   (list (mapcar #'string-to-number
+                 (split-string (read-string "Koeficienty (od nejvyšší mocniny): ")))
+         (read-number "Kořen: ")))
+  (let* ((n (length coeffs))
+         (cur coeffs)
+         (lines (list (concat "  & "
+                              (mapconcat #'my/num->string coeffs " & ")
+                              " \\\\"))))
+    (catch 'done
+      (while t
+        (let* ((acc (car cur)) (out (list acc)) (prods nil))
+          (dolist (c (cdr cur))
+            (let ((p (* acc root)))
+              (setq acc (+ c p))
+              (push p prods)
+              (push acc out)))
+          (setq out (nreverse out) prods (nreverse prods))
+          (push (concat (my/num->string root) " &   & "
+                        (mapconcat #'my/num->string prods " & ")
+                        " \\\\")
+                lines)
+          (push "\\hline" lines)
+          (push (concat "  & " (mapconcat #'my/num->string out " & ") " \\\\")
+                lines)
+          (if (and (zerop (car (last out))) (> (length out) 2))
+              (setq cur (butlast out))
+            (throw 'done nil)))))
+    (insert (format "\\[\n\\begin{array}{c|%s}\n%s\n\\end{array}\n\\]"
+                    (make-string n ?c)
+                    (string-join (nreverse lines) "\n")))))
+#+end_src
+
+** Quadratic equation
+#+begin_src emacs-lisp
+(defun my/quadratic (a b c)
+  "Vloží výpočet kořenů kvadratické rovnice, včetně komplexních."
+  (interactive "nKoeficient a: \nnKoeficient b: \nnKoeficient c: ")
+  (let* ((d (- (* b b) (* 4 a c)))
+         (ds (my/num->string d))
+         (as (my/num->string a))
+         (re (/ (- b) (* 2.0 a))))
+    (insert
+     (format "\\begin{align*}
+%s &= 0 \\\\
+D &= b^2 - 4ac = (%s)^2 - 4 \\cdot %s \\cdot %s = %s \\\\
+"
+             (my/polynom-string (list a b c))
+             (my/num->string b) as (my/num->string c) ds))
+    (cond
+     ((< d 0)
+      (let ((im (/ (sqrt (- d)) (* 2.0 a))))
+        (insert (format "x_{1,2} &= \\frac{-b \\pm i\\sqrt{|D|}}{2a} = \\frac{%s \\pm i\\sqrt{%s}}{%s} \\\\
+x_1 &= %s + %si, \\quad x_2 = %s - %si
+\\end{align*}\n"
+                        (my/num->string (- b)) (my/num->string (- d))
+                        (my/num->string (* 2 a))
+                        (my/num->string re) (my/num->string im)
+                        (my/num->string re) (my/num->string im)))))
+     ((= d 0)
+      (insert (format "x &= \\frac{-b}{2a} = %s
+\\end{align*}\n"
+                      (my/num->string re))))
+     (t
+      (let ((s (sqrt d)))
+        (insert (format "x_{1,2} &= \\frac{-b \\pm \\sqrt{D}}{2a} = \\frac{%s \\pm \\sqrt{%s}}{%s} \\\\
+x_1 &= %s, \\quad x_2 = %s
+\\end{align*}\n"
+                        (my/num->string (- b)) ds (my/num->string (* 2 a))
+                        (my/num->string (/ (+ (- b) s) (* 2.0 a)))
+                        (my/num->string (/ (- (- b) s) (* 2.0 a))))))))))
+#+end_src
+
+** Polynom
+#+begin_src emacs-lisp
+(defun my/polynom-string (coeffs &optional var)
+  "Vrátí LaTeX zápis polynomu z COEFFS (od nejvyšší mocniny)."
+  (let* ((var (or var "x"))
+         (n (1- (length coeffs)))
+         (parts nil))
+    (dolist (c coeffs)
+      (let* ((abs-c (abs c))
+             (znak (if (< c 0) "-" "+"))
+             (mocnina (cond ((= n 0) "")
+                            ((= n 1) var)
+                            (t (format "%s^{%d}" var n))))
+             (cislo (if (and (= abs-c 1) (> n 0)) "" (my/num->string abs-c))))
+        (unless (zerop c)
+          (push (format "%s %s%s" znak cislo mocnina) parts)))
+      (setq n (1- n)))
+    (let ((s (string-join (nreverse parts) " ")))
+      (if (string-prefix-p "+ " s) (substring s 2) s))))
+
+(defun my/polynom (coeffs)
+  "Vloží polynom zadaný koeficienty od nejvyšší mocniny."
+  (interactive
+   (list (mapcar #'string-to-number
+                 (split-string (read-string "Koeficienty (od nejvyšší mocniny): ")))))
+  (insert (my/polynom-string coeffs)))
+#+end_src
+
+** Laas settings
+#+begin_src emacs-lisp
+(use-package! laas
+  :hook (org-mode . laas-mode)
+  :config
+  (aas-set-snippets 'laas-mode
+    :cond #'laas-mathp
+    ;; limity, sumy, integrály
+    "lim"   (lambda () (interactive) (yas-expand-snippet "\\lim_{${1:n} \\to ${2:\\infty}} $0"))
+    "deg" "^\\circ"
+    "txt" (lambda () (interactive) (yas-expand-snippet "\\text{$1}$0"))
+    ",," "\\quad"
+    ";-" "\\cap"
+    "rr" (lambda () (interactive) (yas-expand-snippet "^{\\mathrm{${1:III}}$0"))
+    "Sum"   (lambda () (interactive) (yas-expand-snippet "\\sum_{${1:i=1}}^{${2:n}} $0"))
+    "Int"   (lambda () (interactive) (yas-expand-snippet "\\int_{$1}^{$2} $3 \\,\\mathrm{d}${4:x}$0"))
+    ;; indexy
+    "td"    (lambda () (interactive) (yas-expand-snippet "^{$1}$0"))
+    "__"    (lambda () (interactive) (yas-expand-snippet "_{$1}$0"))
+    "invs"  "^{-1}"
+    "TT"    "^{T}"
+    "an"    "a_n"
+    ;; symboly
+    "notin" "\\notin"
+    "cdd"   "\\cdots"
+    "vdd"   "\\vdots"
+    "ddd"   "\\ddots"
+    "RR"    "\\mathbb{R}"
+    "RX"  "\\mathbb{R}^*"
+    "NN"    "\\mathbb{N}"
+    "ZZ"    "\\mathbb{Z}"
+    "QQ"    "\\mathbb{Q}"
+    "CC"    "\\mathbb{C}"
+    ;; matice s dotazem na rozměr
+    "Amat"  (lambda () (interactive) (my/latex-augmented-matrix))
+    "Mat"   (lambda () (interactive) (my/latex-matrix "bmatrix*" "[r]"))
+    "Pmat"  (lambda () (interactive) (my/latex-matrix "pmatrix"))
+    "Vmat"  (lambda () (interactive) (my/latex-matrix "vmatrix"))
+    :cond #'laas-object-on-left-condition
+    "'t" (lambda () (interactive) (laas-wrap-previous-object "text"))
+    "'x" (lambda () (interactive) (laas-wrap-previous-object "cancel"))
+    "'u" (lambda () (interactive) (laas-wrap-previous-object "underline"))
+    "'s" (lambda () (interactive) (laas-wrap-previous-object "widetilde"))))
+#+end_src
+
+* Org mode
+
+** Appearance
+#+begin_src emacs-lisp
+(custom-theme-set-faces!
+  'doom-one
+  '(org-document-title :height 1.8 :bold t :underline nil)
+  '(org-level-1 :inherit outline-1 :height 1.6)
+  '(org-level-2 :inherit outline-2 :height 1.5)
+  '(org-level-3 :inherit outline-3 :height 1.4)
+  '(org-level-4 :inherit outline-4 :height 1.3)
+  '(org-level-5 :inherit outline-5 :height 1.2)
+  '(org-level-6 :inherit outline-6 :height 1.1)
+  '(org-level-7 :inherit outline-7 :height 1.0)
+  '(org-level-8 :inherit outline-8 :height 1.0))
+#+end_src
+
+** Directory
+#+begin_src emacs-lisp
+(setq org-directory "~/Documents/notes")
+#+end_src
+
+** Notes
+#+begin_src emacs-lisp
+(setq org-default-notes-file (concat org-directory "/notes.org"))
+#+end_src
+
+** Roam
+
+*** Directory
+#+begin_src emacs-lisp
+(setq org-roam-directory "~/Documents/roam")
+#+end_src
+
+*** Auto sync
+#+begin_src emacs-lisp
+(org-roam-db-autosync-mode)
+#+end_src
+
+*** Templates
+#+begin_src emacs-lisp
+(after! org-roam
+  (setq org-roam-capture-templates
+        '(("w" "wiki" plain "* Contents :toc:noexport:\n\n* Introduction\n\n* Notes\n%?\n\n* Related\n\n* Sources"
+           :target (file+head "${slug}.org"
+                              "#+TITLE: ${title}\n#+AUTHOR: Antonín Štýbr\n#+DATE: %<%Y-%m-%d>\n#+FILETAGS: :wiki:")
+           :empty-lines 1
+           :unnarrowed t)
+          ("z" "zettel" plain "%?"
+           :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                              "#+TITLE: ${title}\n#+FILETAGS: :zettel:")
+           :unnarrowed t))))
+#+end_src
+
+** Tables
+
+*** Latex alignment fix (valign)
+ #+begin_src emacs-lisp
+(setq valign-fancy-bar t)
+;; (setq org-modern-table nil)
+;; (add-hook 'org-mode-hook #'valign-mode)
+
+(defun my/org-refresh-first-frame ()
+  (when (and (display-graphic-p) (derived-mode-p 'org-mode))
+    (org-mode)
+    (remove-hook 'server-after-make-frame-hook #'my/org-refresh-first-frame)))
+
+(add-hook 'server-after-make-frame-hook #'my/org-refresh-first-frame)
+
+(defun my/org-toggle-table-style ()
+  "Switch the Org table alignment between valign and org-modern."
+  (interactive)
+  (if (bound-and-true-p valign-mode)
+      (progn
+        (valign-mode -1)
+        (setq org-modern-table t))
+    (setq org-modern-table nil)
+    (valign-mode 1))
+  (when (bound-and-true-p org-modern-mode)
+    (org-modern-mode -1)
+    (org-modern-mode 1))
+  (font-lock-flush)
+  (message "Tabules: %s" (if (bound-and-true-p valign-mode) "valign" "org-modern")))
+
+;; (defun my/enable-valign-in-first-org-buffer ()
+;;   "Enable valign-mode in firstly opened org buffer after Emacs daemon start."
+;;   (when (and (display-graphic-p) (derived-mode-p 'org-mode))
+;;     (valign-mode 1)
+;;    ))
+
+;; (add-hook 'server-after-make-frame-hook #'my/enable-valign-in-first-org-buffer)
+
+;; (add-hook 'server-after-make-frame-hook (lambda () (valign-mode 1)))
+
+;; (add-hook 'server-after-make-frame-hook
+;;           (lambda ()
+;;             (when (display-graphic-p)
+;;               (dolist (b (buffer-list))
+;;                 (with-current-buffer b
+;;                   (when (derived-mode-p 'org-mode)
+;;                     (valign-mode 1)))))))
+ #+end_src
+
+** Smartparens fix
+#+begin_src emacs-lisp
+(after! smartparens
+  (sp-local-pair 'org-mode "{" nil
+                 :unless '((lambda (_id action _ctx)
+                             (and (eq action 'insert)
+                                  (not (eq last-command-event ?{)))))))
+#+end_src
+
+** Org fragtog
+   #+begin_src emacs-lisp
+   (use-package! org-fragtog
+     :hook (org-mode . org-fragtog-mode))
+   #+end_src
+
+* Projectile
+
+** Auto discover
+#+begin_src emacs-lisp
+(setq projectile-auto-discover t)
+#+end_src
+
+*** Auto discover search path
+#+begin_src emacs-lisp
+(setq projectile-project-search-path '(("~/Documents/" . 1) ("~/.dotfiles/" . 1)))
+#+end_src
+
+* SopS
+
+** Decrypt secret
+#+begin_src emacs-lisp
+(defun my/sops-secret (key)
+  "Decrypt the SOPS secret KEY from the secrets.yaml file."
+  (let ((file (expand-file-name "secrets.yaml" doom-user-dir)))
+    (car (process-lines "sops" "-d" "--extract" (format "[\"%s\"]" key) file))))
+#+end_src
+
+** Global mode
+#+begin_src emacs-lisp
+(global-sops-mode 1)
+#+end_src
+
+* Treemacs
+
+** Auto modes
+#+begin_src emacs-lisp
+(after! treemacs
+  (treemacs-project-follow-mode t)
+  (treemacs-follow-mode t)
+  (treemacs-filewatch-mode t))
+
+(add-hook 'projectile-after-switch-project-hook
+          (lambda ()
+            (treemacs-add-and-display-current-project-exclusively)
+            (other-window 1)))
+#+end_src
+
+** Width
+#+begin_src emacs-lisp
+(after! treemacs
+  (setq treemacs-width 35))
+#+end_src
+
+* Yasnippet
+
+** Yas global mode
+#+begin_src emacs-lisp
+(yas-global-mode 1)
+#+end_src
+
+** Snippets in snippets
+#+begin_src emacs-lisp
+(setq yas-triggers-in-field t)
+#+end_src
+
+** File templates
+#+begin_src emacs-lisp
+;; (setq +file-templates-dir (concat +file-templates-dir " /home/sutaiburosu/.config/doom/templates/"))
+(set-file-template! "\\.tex$" :trigger "template.tex" :mode 'latex-mode)
+(set-file-template! "\\.org$" :trigger "template.org" :mode 'org-mode)
+(set-file-template! "\\.php$" :trigger "template.php" :mode 'web-mode)
+#+end_src

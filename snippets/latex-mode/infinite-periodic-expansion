@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: infinite-periodic-expansion
+# key: mol
+# --
+\\overline{$1}$0
