@@ -36,6 +36,7 @@
   - [[#laas-settings][Laas settings]]
 - [[#org-mode][Org mode]]
   - [[#appearance-2][Appearance]]
+  - [[#enable-show-paren-mode][Enable show-paren-mode]]
   - [[#directory][Directory]]
   - [[#notes][Notes]]
   - [[#roam][Roam]]
@@ -455,6 +456,13 @@ x_1 &= %s, \\quad x_2 = %s
   '(org-level-6 :inherit outline-6 :height 1.1)
   '(org-level-7 :inherit outline-7 :height 1.0)
   '(org-level-8 :inherit outline-8 :height 1.0))
+#+end_src
+
+** Enable show-paren-mode
+
+#+begin_src emacs-lisp
+(after! org
+  (remove-hook 'org-mode-hook #'doom-disable-show-paren-mode-h))
 #+end_src
 
 ** Directory
