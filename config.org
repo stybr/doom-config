@@ -446,6 +446,9 @@ x_1 &= %s, \\quad x_2 = %s
     "Mat"   (lambda () (interactive) (my/latex-matrix "bmatrix*" "[r]"))
     "Pmat"  (lambda () (interactive) (my/latex-matrix "pmatrix"))
     "Vmat"  (lambda () (interactive) (my/latex-matrix "vmatrix"))
+    ;; cases
+    ";cs" (lambda () (interactive) (yas-expand-snippet (yas-lookup-snippet "cases")))
+    ";cr" (lambda () (interactive) (yas-expand-snippet (yas-lookup-snippet "rcases")))
     :cond #'laas-object-on-left-condition
     "'t" (lambda () (interactive) (laas-wrap-previous-object "text"))
     "'x" (lambda () (interactive) (laas-wrap-previous-object "cancel"))
