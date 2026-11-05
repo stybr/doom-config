@@ -1,62 +1,63 @@
 #+title: Config
 
 * Table of Contents :toc:
-- [[#copilot][Copilot]]
-  - [[#global-copilot-mode][Global Copilot mode]]
-  - [[#indentation][Indentation]]
-  - [[#keybinding][Keybinding]]
-- [[#doom][Doom]]
-  - [[#appearance][Appearance]]
-- [[#elfeed][Elfeed]]
-  - [[#feed-dir][Feed dir]]
-- [[#emacs][Emacs]]
-  - [[#confirm-kill][Confirm kill]]
-  - [[#debug][Debug]]
-  - [[#appearance-1][Appearance]]
-  - [[#maximize-on-start][Maximize on start]]
-  - [[#initial-buffer][Initial buffer]]
-  - [[#hooks][Hooks]]
-  - [[#custom-keymaps][Custom keymaps]]
-- [[#evil][Evil]]
-  - [[#multiedit][Multiedit]]
-- [[#gptel][GPTel]]
-  - [[#format][Format]]
-  - [[#models][Models]]
-- [[#ispell][Ispell]]
-- [[#latex][Latex]]
-  - [[#cdlatex][Cdlatex]]
-  - [[#latex-packages][Latex packages]]
-  - [[#auto-preview][Auto preview]]
-  - [[#svg-settings-in-latex-preview][Svg settings in Latex preview]]
-  - [[#latex-snippets-in-org-mode][Latex snippets in org mode]]
-  - [[#matrix-generator][Matrix generator]]
-  - [[#augmented-matrix][Augmented matrix]]
-  - [[#horner-generator][Horner generator]]
-  - [[#quadratic-equation][Quadratic equation]]
-  - [[#polynom][Polynom]]
-  - [[#laas-settings][Laas settings]]
-- [[#org-mode][Org mode]]
-  - [[#appearance-2][Appearance]]
-  - [[#enable-show-paren-mode][Enable show-paren-mode]]
-  - [[#directory][Directory]]
-  - [[#notes][Notes]]
-  - [[#toc][TOC]]
-  - [[#roam][Roam]]
-  - [[#tables][Tables]]
-  - [[#smartparens-fix][Smartparens fix]]
-  - [[#org-fragtog][Org fragtog]]
-- [[#projectile][Projectile]]
-  - [[#auto-discover][Auto discover]]
-- [[#sops][SopS]]
-  - [[#decrypt-secret][Decrypt secret]]
-  - [[#global-mode][Global mode]]
-- [[#treemacs][Treemacs]]
-  - [[#auto-modes][Auto modes]]
-  - [[#width][Width]]
-- [[#yasnippet][Yasnippet]]
-  - [[#yas-global-mode][Yas global mode]]
-  - [[#snippets-in-snippets][Snippets in snippets]]
-  - [[#file-templates][File templates]]
+- [[Copilot][Copilot]]
+  - [[Global Copilot mode][Global Copilot mode]]
+  - [[Indentation][Indentation]]
+  - [[Keybinding][Keybinding]]
+- [[Doom][Doom]]
+  - [[Appearance][Appearance]]
+- [[Elfeed][Elfeed]]
+  - [[Feed dir][Feed dir]]
+- [[Emacs][Emacs]]
+  - [[Confirm kill][Confirm kill]]
+  - [[Debug][Debug]]
+  - [[Appearance][Appearance]]
+  - [[Maximize on start][Maximize on start]]
+  - [[Initial buffer][Initial buffer]]
+  - [[Hooks][Hooks]]
+  - [[Custom keymaps][Custom keymaps]]
+  - [[Horizontal scrolling][Horizontal scrolling]]
+- [[Evil][Evil]]
+  - [[Multiedit][Multiedit]]
+- [[GPTel][GPTel]]
+  - [[Format][Format]]
+  - [[Models][Models]]
+- [[Ispell][Ispell]]
+- [[Latex][Latex]]
+  - [[Cdlatex][Cdlatex]]
+  - [[Latex packages][Latex packages]]
+  - [[Auto preview][Auto preview]]
+  - [[Svg settings in Latex preview][Svg settings in Latex preview]]
+  - [[Latex snippets in org mode][Latex snippets in org mode]]
+  - [[Matrix generator][Matrix generator]]
+  - [[Augmented matrix][Augmented matrix]]
+  - [[Horner generator][Horner generator]]
+  - [[Quadratic equation][Quadratic equation]]
+  - [[Polynom][Polynom]]
+  - [[Laas settings][Laas settings]]
+- [[Org mode][Org mode]]
+  - [[Appearance][Appearance]]
+  - [[Enable show-paren-mode][Enable show-paren-mode]]
+  - [[Directory][Directory]]
+  - [[Notes][Notes]]
+  - [[TOC][TOC]]
+  - [[Roam][Roam]]
+  - [[Tables][Tables]]
+  - [[Smartparens fix][Smartparens fix]]
+  - [[Org fragtog][Org fragtog]]
+- [[Projectile][Projectile]]
+  - [[Auto discover][Auto discover]]
+- [[SopS][SopS]]
+  - [[Decrypt secret][Decrypt secret]]
+  - [[Global mode][Global mode]]
+- [[Treemacs][Treemacs]]
+  - [[Auto modes][Auto modes]]
+  - [[Width][Width]]
+- [[Yasnippet][Yasnippet]]
+  - [[Yas global mode][Yas global mode]]
+  - [[Snippets in snippets][Snippets in snippets]]
+  - [[File templates][File templates]]
 
 * Copilot
 
@@ -172,6 +173,11 @@
 (map! :leader :desc "Switch between valign and org-modern" "v" #'my/org-toggle-table-style)
 #+end_src
 
+** Horizontal scrolling
+#+begin_src emacs-lisp
+(setq mouse-wheel-tilt-scroll t)
+#+end_src
+
 * Evil
 
 ** Multiedit
@@ -225,7 +231,7 @@
 ** Latex packages
 #+begin_src emacs-lisp
 (after! org
-  (dolist (pkg '("stmaryrd" "cancel" "tikz" "mathtools"))
+  (dolist (pkg '("stmaryrd" "cancel" "tikz" "mathtools" "nicematrix"))
     (add-to-list 'org-latex-packages-alist (list "" pkg t)))
 
   (setq org-format-latex-header
@@ -446,6 +452,7 @@ x_1 &= %s, \\quad x_2 = %s
     "Mat"   (lambda () (interactive) (my/latex-matrix "bmatrix*" "[r]"))
     "Pmat"  (lambda () (interactive) (my/latex-matrix "pmatrix"))
     "Vmat"  (lambda () (interactive) (my/latex-matrix "vmatrix"))
+    "Sum" (lambda () (interactive) (yas-expand-snippet (yas-lookup-snippet "sum")))
     ;; cases
     ";cs" (lambda () (interactive) (yas-expand-snippet (yas-lookup-snippet "cases")))
     ";cr" (lambda () (interactive) (yas-expand-snippet (yas-lookup-snippet "rcases")))
