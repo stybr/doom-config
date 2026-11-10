@@ -18,6 +18,7 @@
   - [[Hooks][Hooks]]
   - [[Custom keymaps][Custom keymaps]]
   - [[Horizontal scrolling][Horizontal scrolling]]
+  - [[Dape][Dape]]
 - [[Evil][Evil]]
   - [[Multiedit][Multiedit]]
 - [[GPTel][GPTel]]
@@ -176,6 +177,12 @@
 ** Horizontal scrolling
 #+begin_src emacs-lisp
 (setq mouse-wheel-tilt-scroll t)
+#+end_src
+
+** Dape
+#+begin_src emacs-lisp
+(after! python
+  (require 'dape))
 #+end_src
 
 * Evil
